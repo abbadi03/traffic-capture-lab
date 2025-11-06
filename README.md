@@ -1,29 +1,43 @@
-# traffic-capture-lab
-Traffic Capture Mini lab
-## Analysis Screenshots
+# Traffic Capture & Threat Visualization — Lab
 
-### Figure 1 — Protocol Hierarchy
-![Protocol Hierarchy](1.png)
+**Environment:** VirtualBox (Host-Only), Kali (attacker) + Ubuntu (victim)  
+**Tools:** tcpdump, nmap, Wireshark
 
-**Figure 1:** Breakdown of captured traffic — heavy UDP (DNS/mDNS), significant IPv4 activity, plus TCP/ICMP/ARP from scan & ping.
+## Summary
+Captured controlled traffic in an isolated VM lab. Generated ping and nmap SYN scan from attacker VM and analyzed the PCAP.
 
----
+## Artifacts
+- capture_lab.pcap
+- protocol_hierarchy.png
+- io_graph.png
+- conversation.png
+- packet_detail_syn.png
 
-### Figure 2 — I/O Graph (SYN & ICMP spikes)
-![I/O Graph](2.png)
-
-**Figure 2:** SYN/ICMP spikes showing port-scan and ping activity.
-
----
-
-### Figure 3 — Conversations (Top talkers)
-![Conversations](3.png)
-
-**Figure 3:** Top talkers: attacker (192.168.56.128) → victim (192.168.56.1), consistent with scanning.
+## Findings
+- SYN spikes observed during the SYN scan — typical reconnaissance signature.
+- Majority UDP traffic due to DNS/mDNS.
+- Repeated SYN retransmissions to dst port 53 without completing handshake.
 
 ---
 
-### Figure 4 — SYN packets (details)
-![SYN Packets](4.png)
+## Screenshots & captions
 
-**Figure 4:** Repeated SYNs and retransmissions to dst port 53 — scanning attempts without TCP handshake completion.
+<figure>
+  <img src="1.png" alt="Protocol Hierarchy" width="800">
+  <figcaption><strong>Figure 1:</strong> Protocol Hierarchy — heavy UDP (DNS/mDNS) and IPv4 traffic.</figcaption>
+</figure>
+
+<figure>
+  <img src="2.png" alt="I/O Graph" width="800">
+  <figcaption><strong>Figure 2:</strong> I/O Graph showing SYN and ICMP spikes during scan/ping activity.</figcaption>
+</figure>
+
+<figure>
+  <img src="3.png" alt="Conversations" width="800">
+  <figcaption><strong>Figure 3:</strong> Conversations — attacker (192.168.56.128) -> victim (192.168.56.1) top talker.</figcaption>
+</figure>
+
+<figure>
+  <img src="4.png" alt="SYN Packet Details" width="800">
+  <figcaption><strong>Figure 4:</strong> SYN packets with retransmissions to dst port 53 — indicates scanning attempts.</figcaption>
+</figure>
