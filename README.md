@@ -1,6 +1,6 @@
 # Traffic Capture & Threat Visualization — Lab
 
-**Environment:** VirtualBox (Host-Only), Kali (attacker) + Ubuntu (victim)  
+**Environment:** VMWare (Host-Only), Kali (attacker) + Ubuntu (victim)  
 **Tools:** tcpdump, nmap, Wireshark
 
 ## Summary
